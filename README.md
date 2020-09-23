@@ -1,5 +1,5 @@
 # Divider EditText
-Divider EditText is an EditText for separating letters.
+Divider EditText is an EditText for separating letters in android application.
 
 ## Preview
 <div>
