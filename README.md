@@ -2,9 +2,11 @@
 Divider EditText is an EditText for separating letters.
 
 ## Preview
+<div>
 <img src="screen1.gif" width="260" />
 <img src="screen2.gif" width="260" />
 <img src="screen3.gif" width="260" />
+</div>
 
 ## Gradle
 
