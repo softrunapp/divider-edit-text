@@ -1,0 +1,3 @@
+include ':divideredittext'
+include ':app'
+rootProject.name = "Divider EditText Application"
