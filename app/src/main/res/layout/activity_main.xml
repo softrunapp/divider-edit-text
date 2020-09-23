@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         app:dividerLength="4"
         app:dividerValue="-"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+        android:layout_marginTop="200dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
