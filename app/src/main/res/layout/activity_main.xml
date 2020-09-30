@@ -9,8 +9,9 @@
     <com.softrunapps.divideredittext.DividerEditText
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        app:dividerLength="4"
+        app:dividerLength="3"
         app:dividerValue="-"
+        android:textDirection="ltr"
         android:gravity="center"
         android:layout_marginTop="200dp"
         app:layout_constraintLeft_toLeftOf="parent"

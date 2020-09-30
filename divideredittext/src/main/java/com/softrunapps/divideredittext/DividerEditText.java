@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -78,12 +79,18 @@ public class DividerEditText extends AppCompatEditText {
                 }
                 if (stringValueArray.length == 1) {
                     setText(stringValueArray[0]);
+                    post(new Runnable() {
+                        @Override
+                        public void run() {
+                            setSelection(getText().length());
+                        }
+                    });
                     return;
                 }
-                StringBuilder resultValue = new StringBuilder(stringValueArray[0]);
-                for (int i = 1; i < stringValueArray.length; i++) {
-                    resultValue.append(stringValueArray[i]);
-                    if (i % dividerLength == 0 && i < stringValueArray.length - 1
+                StringBuilder resultValue = new StringBuilder();
+                for (int i = 1; i <= stringValueArray.length; i++) {
+                    resultValue.append(stringValueArray[i - 1]);
+                    if (i % dividerLength == 0 && i <= stringValueArray.length - 1
                             && !dividerValue.isEmpty()) {
                         resultValue.append(" ");
                         resultValue.append(dividerValue);
