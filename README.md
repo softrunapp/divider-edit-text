@@ -1,10 +1,12 @@
 # Divider EditText
-Divider EditText is an EditText for separating letters.
+Divider EditText is an EditText for separating letters in android application.
 
 ## Preview
+<div>
 <img src="screen1.gif" width="260" />
 <img src="screen2.gif" width="260" />
 <img src="screen3.gif" width="260" />
+</div>
 
 ## Gradle
 
@@ -20,7 +22,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency:
 
 	dependencies {
-	    implementation ''
+	    implementation 'com.github.softrunapp:divider-edit-text:1.0.0'
 	}
 
 
