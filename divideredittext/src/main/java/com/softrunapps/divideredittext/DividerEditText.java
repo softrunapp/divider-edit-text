@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DividerEditText extends AppCompatEditText {
     private String lastEditTextValue = "";
     private String dividerValue = "";
@@ -64,48 +67,51 @@ public class DividerEditText extends AppCompatEditText {
                 if (dividerLength == 0) {
                     return;
                 }
-                String currentValue = getText().toString()
-                        .replace(dividerValue, "")
-                        .replace(" ", "").trim();
-
-                if (lastEditTextValue.equals(currentValue)) {
-                    return;
-                }
-                lastEditTextValue = currentValue;
-                String[] stringValueArray = currentValue.split("");
-                if (stringValueArray.length == 0) {
-                    setText("");
-                    return;
-                }
-                if (stringValueArray.length == 1) {
-                    setText(stringValueArray[0]);
-                    post(new Runnable() {
-                        @Override
-                        public void run() {
-                            setSelection(getText().length());
-                        }
-                    });
-                    return;
-                }
-                StringBuilder resultValue = new StringBuilder();
-                for (int i = 1; i <= stringValueArray.length; i++) {
-                    resultValue.append(stringValueArray[i - 1]);
-                    if (i % dividerLength == 0 && i <= stringValueArray.length - 1
-                            && !dividerValue.isEmpty()) {
-                        resultValue.append(" ");
-                        resultValue.append(dividerValue);
-                        resultValue.append(" ");
-                    }
-                }
-                post(new Runnable() {
-                    @Override
-                    public void run() {
-                        setSelection(getText().length());
-                    }
-                });
-                setText(resultValue.toString());
+                initDivider();
             }
         });
+    }
+
+    private void initDivider() {
+        int courser = dividerLength;
+
+        String currentValue = getText().toString()
+                .replace(dividerValue, "")
+                .replace(" ", "").trim();
+
+        if (lastEditTextValue.equals(currentValue)) {
+            return;
+        }
+        lastEditTextValue = currentValue;
+        if (currentValue.length() < courser) {
+            return;
+        }
+
+        List<String> words = new ArrayList<>();
+        for (int i = 0; i < currentValue.length(); i += dividerLength) {
+            if (courser > currentValue.length()) {
+                words.add(currentValue.substring(i, currentValue.length()));
+                break;
+            } else {
+                words.add(currentValue.substring(i, courser));
+            }
+            courser += dividerLength;
+        }
+        StringBuilder result = new StringBuilder(words.get(0));
+        for (int i = 1; i < words.size(); i++) {
+            result.append(" ");
+            result.append(dividerValue);
+            result.append(" ");
+            result.append(words.get(i));
+        }
+        post(new Runnable() {
+            @Override
+            public void run() {
+                setSelection(getText().length());
+            }
+        });
+        this.setText(result);
+
     }
 
     public int getDividerLength() {
